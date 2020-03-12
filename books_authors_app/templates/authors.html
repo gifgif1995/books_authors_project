@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add an Author</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="container mt-4">
+    <div class="text-center shadow">
+        <h2 class="text-primary m-4">Add an Author</h2>
+        <form class="font-weight-bold" action='/add_author' method='post'>
+            {% csrf_token %}
+            <p>First Name: <input type="text" name="fname"></p>
+            <p>Last Name: <input type="text" name="lname"></p>
+            <p>Notes: <textarea name="notes"></textarea></p>
+            <input class="btn-success" type="submit" value="Add">
+        </form>
+        <div class="m-4"><a href="/">Books Page</a></div>
+    </div>
+    <div>
+        <table class="table table-dark table-striped">
+            <thead class="thead-light">
+                <tr class="">
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for author in all_authors %}
+                <tr>
+                    <td>{{ author.id }}</td>
+                    <td>{{ author.first_name }} {{ author.last_name }}</td>
+                    <td><a href="/authors/{{ author.id }}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

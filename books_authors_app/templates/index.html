@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add a book</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body class="container mt-4">
+    <div class="text-center shadow">
+        <h2 class="text-primary m-4">Add a Book</h2>
+        <form class="font-weight-bold" action='/add_book' method='post'>
+            {% csrf_token %}
+            <p>Title: <input type="text" name="title"></p>
+            <p>Description: <textarea name="desc"></textarea></p>
+            <input class="btn-success" type="submit" value="Add">
+        </form>
+        <div class="m-4"><a href="/authors">Authors Page</a></div>
+    </div>
+    <div>
+        <table class="table table-dark table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in all_books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td><a href="/books/{{ book.id }}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
